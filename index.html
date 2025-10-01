@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Teacher's Day</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f9f7d9, #fddde6);
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 850px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      color: #2e7d32;
+      animation: fadeInDown 2s ease;
+    }
+
+    p {
+      font-size: 1.3em;
+      margin: 10px auto;
+      color: #444;
+      animation: fadeInUp 2s ease;
+    }
+
+    /* Wrapper keeps both centered */
+    .photo-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+    }
+
+    /* Common hidden state */
+    .toggle-content {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    /* Visible state */
+    .toggle-content.show {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+    }
+
+    /* Single teacher photo */
+    .main-photo {
+      width: 280px;
+      border-radius: 50%;
+      border: 6px solid #2e7d32;
+      background: white;
+      padding: 8px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .main-photo:hover {
+      transform: scale(1.05);
+    }
+
+    /* Gallery view (3 horizontal photos) */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 200px;
+      border-radius: 15px;
+      border: 4px solid #2e7d32;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      font-size: 1.2em;
+      margin-top: 15px;
+      color: #555;
+      animation: fadeInUp 2s ease;
+    }
+
+    /* Floating decorative icons */
+    .decor {
+      position: absolute;
+      opacity: 0.6;
+      animation: floatSide 12s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatSide {
+      from { transform: translateY(0); opacity: 0.7; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Happy Teacher's Day 🎉</h1>
+    <p>Dear Ma’am, thank you for inspiring us, guiding us, and making learning a wonderful journey.</p>
+    
+    <!-- Wrapper -->
+    <div class="photo-wrapper">
+      <!-- Default photo -->
+      <div id="mainPhoto" class="toggle-content show">
+        <img src="teacher.jpg" alt="Teacher Photo" class="main-photo" onclick="toggleGallery()">
+      </div>
+
+      <!-- Gallery -->
+      <div id="gallery" class="toggle-content">
+        <div class="gallery">
+          <img src="activity1.jpg" alt="Activity 1" onclick="toggleGallery()">
+          <img src="activity2.jpg" alt="Activity 2" onclick="toggleGallery()">
+          <img src="activity3.jpg" alt="Activity 3" onclick="toggleGallery()">
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer-text">We appreciate you and celebrate you today! 💖</footer>
+  </div>
+
+  <script>
+    let showingGallery = false;
+
+    function toggleGallery() {
+      const mainPhoto = document.getElementById("mainPhoto");
+      const gallery = document.getElementById("gallery");
+      const footerText = document.getElementById("footer-text");
+
+      if (!showingGallery) {
+        mainPhoto.classList.remove("show");
+        gallery.classList.add("show");
+        footerText.innerText = "May you have a great day Ma'am Christine!!! 🎉";
+        showingGallery = true;
+      } else {
+        gallery.classList.remove("show");
+        mainPhoto.classList.add("show");
+        footerText.innerText = "We appreciate you and celebrate you today! 💖";
+        showingGallery = false;
+      }
+    }
+
+    // Floating decorations
+    function createDecor() {
+      const icons = ["📚","🌸","🍎","⭐"];
+      const decor = document.createElement("div");
+      decor.classList.add("decor");
+      decor.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+      
+      decor.style.fontSize = (20 + Math.random() * 25) + "px";
+      decor.style.left = (Math.random() * 90) + "%";
+      decor.style.top = "100vh";
+      decor.style.animationDuration = (8 + Math.random() * 5) + "s";
+      
+      document.body.appendChild(decor);
+      setTimeout(() => decor.remove(), 13000);
+    }
+
+    setInterval(createDecor, 2000);
+  </script>
+</body>
+</html>
